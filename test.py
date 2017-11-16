@@ -15,5 +15,11 @@ def combinations(data, size):
 
 if __name__ == "__main__":
 	str = sys.argv[1]
+	repeats = dict()
 	for word in str.split(" "):
-		print combinations(word, 4)
+		for k, v in combinations(word, 4).iteritems():
+			repeats[k] = repeats.get(k, 0) + v
+
+	total = reduce(lambda a, b: a+b, repeats.itervalues(), 0)
+
+	print dict(map(lambda (k, v): (k, 100.0* v/total), repeats.iteritems()))
